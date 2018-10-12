@@ -1,0 +1,13 @@
+Out Tasklist (16 hours)
+
+[DONE] First Hello World App (15m)
+-----------------------------------------+
+Database (2H)
+Web/API (4h)
+Basic Concept of React (2h)
+Calling a web/api in React (2h)
+Login Page (1h)
+Compse a new message (1h)
+List of all sent messages (2h)
+Save a message as draft (1h)
+Delete a message (1h)
