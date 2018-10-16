@@ -37,10 +37,10 @@ namespace WebApi.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UserDto userDto)
         {
-            var user = _userService.Authenticate(userDto.Username, userDto.Password);
+            var user = _userService.Authenticate(userDto.Email, userDto.Password);
 
             if (user == null)
-                return BadRequest("Username or password is incorrect");
+                return BadRequest("Email or password is incorrect");
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -59,7 +59,7 @@ namespace WebApi.Controllers
             // return basic user info (without password) and token to store client side
             return Ok(new {
                 Id = user.Id,
-                Username = user.Username,
+                Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Token = tokenString

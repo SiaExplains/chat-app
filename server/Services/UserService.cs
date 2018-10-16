@@ -8,7 +8,7 @@ namespace WebApi.Services
 {
     public interface IUserService
     {
-        User Authenticate(string username, string password);
+        User Authenticate(string email, string password);
         IEnumerable<User> GetAll();
         User GetById(int id);
         User Create(User user, string password);
@@ -25,14 +25,14 @@ namespace WebApi.Services
             _context = context;
         }
 
-        public User Authenticate(string username, string password)
+        public User Authenticate(string email, string password)
         {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
                 return null;
 
-            var user = _context.Users.SingleOrDefault(x => x.Username == username);
+            var user = _context.Users.SingleOrDefault(x => x.Email == email);
 
-            // check if username exists
+            // check if email exists
             if (user == null)
                 return null;
 
@@ -60,8 +60,8 @@ namespace WebApi.Services
             if (string.IsNullOrWhiteSpace(password))
                 throw new AppException("Password is required");
 
-            if (_context.Users.Any(x => x.Username == user.Username))
-                throw new AppException("Username '" + user.Username + "' is already taken");
+            if (_context.Users.Any(x => x.Email == user.Email))
+                throw new AppException("Email '" + user.Email + "' is already taken");
 
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -82,17 +82,17 @@ namespace WebApi.Services
             if (user == null)
                 throw new AppException("User not found");
 
-            if (userParam.Username != user.Username)
+            if (userParam.Email != user.Email)
             {
-                // username has changed so check if the new username is already taken
-                if (_context.Users.Any(x => x.Username == userParam.Username))
-                    throw new AppException("Username " + userParam.Username + " is already taken");
+                // email has changed so check if the new email is already taken
+                if (_context.Users.Any(x => x.Email == userParam.Email))
+                    throw new AppException("Email " + userParam.Email + " is already taken");
             }
 
             // update user properties
             user.FirstName = userParam.FirstName;
             user.LastName = userParam.LastName;
-            user.Username = userParam.Username;
+            user.Email = userParam.Email;
 
             // update password if it was entered
             if (!string.IsNullOrWhiteSpace(password))
