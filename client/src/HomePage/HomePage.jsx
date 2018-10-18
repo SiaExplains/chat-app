@@ -16,29 +16,27 @@ class HomePage extends React.Component {
     render() {
         const { user, users } = this.props;
         return (
-            <div className="col-md-6 col-md-offset-3">
-                <h1>Hi {user.firstName}!</h1>
-                <p>You're logged in with React and ASP.NET Core 2.0!!</p>
-                <h3>All registered users:</h3>
-                {users.loading && <em>Loading users...</em>}
-                {users.error && <span className="text-danger">ERROR: {users.error}</span>}
-                {users.items &&
-                    <ul>
-                        {users.items.map((user, index) =>
-                            <li key={user.id}>
-                                {user.firstName + ' ' + user.lastName}
-                                {
-                                    user.deleting ? <em> - Deleting...</em>
-                                    : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>
-                                    : <span> - <a onClick={this.handleDeleteUser(user.id)}>Delete</a></span>
-                                }
-                            </li>
-                        )}
-                    </ul>
-                }
-                <p>
-                    <Link to="/login">Logout</Link>
-                </p>
+            <div>
+                <h3>Hi {user.firstName}!</h3>                                                
+                
+                <Link to="/login" className="btn btn-warning">خروج</Link>
+                &nbsp;
+                <input type="button" className="btn btn-info" value="ارسال پیام"/>
+
+                <br/>
+				<br/>
+				<div className="row">
+					<div className="col-3">
+						<div className="listgroup" id="width">
+                        <a href="#" className="list-group-item list-group-item-action">صندوق پیام</a>
+							<a href="#" className="list-group-item list-group-item-action">ارسال شده ها</a>
+							<a href="#" className="list-group-item list-group-item-action">پیش نویس ها</a>							
+							<a href="#" className="list-group-item list-group-item-action">پیام های حذف شده</a>
+						</div>
+					</div>
+					<div className="col-9"></div>
+				</div>
+
             </div>
         );
     }

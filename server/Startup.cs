@@ -40,8 +40,7 @@ namespace WebApi
             services.AddCors();
             services.AddDbContext<DataContext>(options => options.UseSqlServer(appSettings.ConnectionString));
             services.AddMvc();
-            services.AddAutoMapper();
-
+            services.AddAutoMapper();            
 
             services.AddAuthentication(x =>
             {

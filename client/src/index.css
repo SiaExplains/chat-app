@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'BYekan'; /*تعریف یک نام برای فونت*/
+  src: url('./fonts/BYekan.eot'); /*اکسپلورر 9 به بعد*/
+  src: local('/fonts/bYekan'), /*بررسی نصب بودن فونت در سیستم کاربر*/
+  local('./fonts/b Yekan'), /*برای برخی از مرورگرها مانند سافاری*/
+  url('./fonts/Yekan.eot?#iefix') format('embedded-opentype'), /*هک برای اکسپلورر 8 و ماقبل*/
+  url('./fonts/Yekan.woff') format('woff'), /*مرورگر های جدید*/
+  url('./fonts/Yekan.ttf') format('truetype'), /*تمام مرورگرها به جزء اکسپلورر*/
+  url('./fonts/Yekan.svg#BYekan') format('svg'); /*نسخه های قدیمی سیستم عامل iOS*/
+  font-style: normal;
+  font-weight: normal;
+}
+
+body {
+  font-family: 'BYekan' !important;
+  background-color: #efefef;
+}
+
+

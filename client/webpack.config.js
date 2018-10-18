@@ -19,8 +19,36 @@ module.exports = {
                 query: {
                     presets: ['react', 'es2015', 'stage-3']
                 }
-            }
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i, 
+                loader: "file-loader?name=/images/[name].[ext]"
+            },
+            {
+                test: /\.css$/,
+                loader: 'style-loader'
+            }, 
+            {
+                test: /\.css$/,
+                loader: 'css-loader',
+                query: {
+                  modules: true,
+                  localIdentName: '[name]__[local]___[hash:base64:5]'
+                }
+            },
+
+            {
+                test: /\.(ttf|eot|woff|woff2)$/,
+                use: {
+                  loader: "file-loader",
+                  options: {
+                    name: "fonts/[name].[ext]",
+                  },
+                },
+              },
         ]
+       
+
     },
     plugins: [new HtmlWebpackPlugin({
         template: './src/index.html',

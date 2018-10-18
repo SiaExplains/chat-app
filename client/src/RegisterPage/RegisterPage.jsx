@@ -15,11 +15,33 @@ class RegisterPage extends React.Component {
                 email: '',
                 password: ''
             },
-            submitted: false
+            submitted: false,
+            myPlaces : {
+                placeName : 'Enter your firstname',
+                placeFamily : 'Enter your lastname'
+            }
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.handleReset = this.handleReset.bind(this);
+    }
+
+    handleReset() {
+        
+        const { user } = this.state;
+        user.firstName = '';
+        user.lastName = '';
+        user.email = '';
+        user.password = '';
+        this.forceUpdate();
+    }
+
+
+    handleClick(event){
+        const { value } = event.target;
+        alert(value);
     }
 
     handleChange(event) {
@@ -32,6 +54,9 @@ class RegisterPage extends React.Component {
             }
         });
     }
+
+    
+
 
     handleSubmit(event) {
         event.preventDefault();
@@ -47,20 +72,21 @@ class RegisterPage extends React.Component {
     render() {
         const { registering  } = this.props;
         const { user, submitted } = this.state;
+        const { myPlaces } = this.state;
         return (
             <div className="col-md-6 col-md-offset-3">
                 <h2>Register</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
                         <label htmlFor="firstName">First Name</label>
-                        <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleChange} />
+                        <input type="text" className="form-control" placeholder={myPlaces.placeName} name="firstName" value={user.firstName} onChange={this.handleChange} />
                         {submitted && !user.firstName &&
                             <div className="help-block">First Name is required</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
                         <label htmlFor="lastName">Last Name</label>
-                        <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleChange} />
+                        <input type="text" onClick={this.handleClick} className="form-control" placeholder={myPlaces.placeFamily} name="lastName" value={user.lastName} onChange={this.handleChange} />
                         {submitted && !user.lastName &&
                             <div className="help-block">Last Name is required</div>
                         }
@@ -84,7 +110,13 @@ class RegisterPage extends React.Component {
                         {registering && 
                             <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                         }
-                        <Link to="/login" className="btn btn-link">Cancel</Link>
+                        &nbsp;
+                        
+                        &nbsp;
+                        <input type="button" className="btn btn-success"
+                         onClick={this.handleReset} value="Reset" />
+                        &nbsp;&nbsp;
+                         <Link to="/login" className="btn btn-warning">Cancel</Link>
                     </div>
                 </form>
             </div>
