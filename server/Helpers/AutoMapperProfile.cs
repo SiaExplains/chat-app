@@ -10,6 +10,9 @@ namespace WebApi.Helpers
         {
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
+
+            CreateMap<MessageDto, Message>();
+            CreateMap<Message, MessageDto>();
         }
     }
 }

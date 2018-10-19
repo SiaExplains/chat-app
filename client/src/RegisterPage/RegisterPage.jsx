@@ -17,14 +17,14 @@ class RegisterPage extends React.Component {
             },
             submitted: false,
             myPlaces : {
-                placeName : 'Enter your firstname',
-                placeFamily : 'Enter your lastname'
+                placeName : 'نام خود را وارد کنید',
+                placeFamily : 'نام خانوادگی را وارد کنید',
+                placeEmail:  'Enter e-mail address...'
             }
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleClick = this.handleClick.bind(this);
         this.handleReset = this.handleReset.bind(this);
     }
 
@@ -39,10 +39,6 @@ class RegisterPage extends React.Component {
     }
 
 
-    handleClick(event){
-        const { value } = event.target;
-        alert(value);
-    }
 
     handleChange(event) {
         const { name, value } = event.target;
@@ -74,51 +70,57 @@ class RegisterPage extends React.Component {
         const { user, submitted } = this.state;
         const { myPlaces } = this.state;
         return (
-            <div className="col-md-6 col-md-offset-3">
-                <h2>Register</h2>
-                <form name="form" onSubmit={this.handleSubmit}>
-                    <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
-                        <label htmlFor="firstName">First Name</label>
-                        <input type="text" className="form-control" placeholder={myPlaces.placeName} name="firstName" value={user.firstName} onChange={this.handleChange} />
-                        {submitted && !user.firstName &&
-                            <div className="help-block">First Name is required</div>
-                        }
-                    </div>
-                    <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
-                        <label htmlFor="lastName">Last Name</label>
-                        <input type="text" onClick={this.handleClick} className="form-control" placeholder={myPlaces.placeFamily} name="lastName" value={user.lastName} onChange={this.handleChange} />
-                        {submitted && !user.lastName &&
-                            <div className="help-block">Last Name is required</div>
-                        }
-                    </div>
-                    <div className={'form-group' + (submitted && !user.email ? ' has-error' : '')}>
-                        <label htmlFor="email">email</label>
-                        <input type="text" className="form-control" name="email" value={user.email} onChange={this.handleChange} />
-                        {submitted && !user.email &&
-                            <div className="help-block">Email is required</div>
-                        }
-                    </div>
-                    <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} />
-                        {submitted && !user.password &&
-                            <div className="help-block">Password is required</div>
-                        }
-                    </div>
-                    <div className="form-group">
-                        <button className="btn btn-primary">Register</button>
-                        {registering && 
-                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                        }
-                        &nbsp;
-                        
-                        &nbsp;
-                        <input type="button" className="btn btn-success"
-                         onClick={this.handleReset} value="Reset" />
-                        &nbsp;&nbsp;
-                         <Link to="/login" className="btn btn-warning">Cancel</Link>
-                    </div>
-                </form>
+            <div>
+                <div className="col-md-6 col-md-offset-3 text-right">
+                    <h1>ثبت نام</h1>
+                    <br /><br />
+                    <form name="form" onSubmit={this.handleSubmit}>
+                        <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
+                            <label htmlFor="firstName">نام</label>
+                            <input type="text" className="form-control  text-right" placeholder={myPlaces.placeName} name="firstName" value={user.firstName} onChange={this.handleChange} />
+                            {submitted && !user.firstName &&
+                                <div className="help-block">نام را وارد کنید</div>
+                            }
+                        </div>
+                        <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
+                            <label htmlFor="lastName">نام خانوادگی</label>
+                            <input type="text" className="form-control  text-right" placeholder={myPlaces.placeFamily} name="lastName" value={user.lastName} onChange={this.handleChange} />
+                            {submitted && !user.lastName &&
+                                <div className="help-block">نام خانوادگی را وارد کنید</div>
+                            }
+                        </div>
+                        <div className={'form-group' + (submitted && !user.email ? ' has-error' : '')}>
+                            <label htmlFor="email">پست الکترونیک</label>
+                            <input type="text" className="form-control" placeholder={myPlaces.placeEmail} name="email" value={user.email} onChange={this.handleChange} />
+                            {submitted && !user.email &&
+                                <div className="help-block">ایمیل را وارد کنید</div>
+                            }
+                        </div>
+                        <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
+                            <label htmlFor="password">کلمه عبور</label>
+                            <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} />
+                            {submitted && !user.password &&
+                                <div className="help-block">پسورد را وارد کنید</div>
+                            }
+                        </div>
+                        <div className="form-group">
+                            {
+                                registering && 
+                                <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                            }
+                            &nbsp;
+                            <button className="btn btn-lg btn-primary">ثبت</button>
+
+                            &nbsp;
+                            
+                            &nbsp;
+                            <input type="button" className="btn btn-lg btn-success"
+                            onClick={this.handleReset} value="انصراف" />
+                            &nbsp;&nbsp;
+                            <Link to="/login" className="btn btn-lg btn-warning">بازگشت</Link>
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     }

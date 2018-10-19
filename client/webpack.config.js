@@ -22,7 +22,7 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i, 
-                loader: "file-loader?name=/images/[name].[ext]"
+                loader: "file-loader?name=images/[name].[ext]"
             },
             {
                 test: /\.css$/,
@@ -36,7 +36,6 @@ module.exports = {
                   localIdentName: '[name]__[local]___[hash:base64:5]'
                 }
             },
-
             {
                 test: /\.(ttf|eot|woff|woff2)$/,
                 use: {

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebApi.Entities;
@@ -58,10 +58,10 @@ namespace WebApi.Services
         {
             // validation
             if (string.IsNullOrWhiteSpace(password))
-                throw new AppException("Password is required");
+                throw new AppException("پسورد اجباری است");
 
             if (_context.Users.Any(x => x.Email == user.Email))
-                throw new AppException("Email '" + user.Email + "' is already taken");
+                throw new AppException("ایمیل '" + user.Email + "' قبلا ثبت شده است");
 
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -80,13 +80,13 @@ namespace WebApi.Services
             var user = _context.Users.Find(userParam.Id);
 
             if (user == null)
-                throw new AppException("User not found");
+                throw new AppException("کاربر یافت نشد");
 
             if (userParam.Email != user.Email)
             {
                 // email has changed so check if the new email is already taken
                 if (_context.Users.Any(x => x.Email == userParam.Email))
-                    throw new AppException("Email " + userParam.Email + " is already taken");
+                    throw new AppException("ایمیل " + userParam.Email + " قبلا ثبت شده است");
             }
 
             // update user properties

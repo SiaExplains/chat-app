@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { userActions } from '../_actions';
-import styles from '../index.css';
-import logo from '../images/login.png'
+import styles from '../styles/index.css';
+ import logo from '../images/login.png'
+import loginCss from './login.css'
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -47,9 +47,13 @@ class LoginPage extends React.Component {
         const { email, password, submitted } = this.state;
         return (
             <div>
-                <div className="col-md-6 col-md-offset-3" align="center">
-                    <div className="card">                    
-                        <img src={logo } width="140px" height="140px" />
+                <div className="col-sm-4 col-sm-offset-4" align="center">
+                    <div>      
+                    <br /><br /><br /><br />              
+                        <img src={logo} width="140px" height="140px" />
+                        
+
+                        {/* <div className={loginCss.login}></div> */}
                         <br /><br />
                         <form name="form" onSubmit={this.handleSubmit}>
                             <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
@@ -67,10 +71,12 @@ class LoginPage extends React.Component {
                                 }
                             </div>
                             <div className="form-group">
-                                <button className="btn btn-lg btn-primary">ورود</button>
-                                {loggingIn &&
+                                {
+                                    loggingIn &&
                                     <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                                 }
+                                &nbsp;&nbsp;
+                                <button className="btn btn-lg btn-primary">ورود</button>
                                 &nbsp;&nbsp;
                                 <Link to="/register" className="btn btn-group btn-lg btn-success">ثبت نام</Link>
                             </div>

@@ -24,3 +24,9 @@ export const userConstants = {
     DELETE_SUCCESS: 'USERS_DELETE_SUCCESS',
     DELETE_FAILURE: 'USERS_DELETE_FAILURE'    
 };
+
+export const messageConstants = {
+    SAVE_REQUEST: 'MESSAGE_SAVE_REQUEST',
+    SAVE_SUCCESS: 'MESSAGE_SAVE_SUCCESS',
+    SAVE_FAILURE: 'MESSAGE_SAVE_FAILURE',
+}

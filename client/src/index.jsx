@@ -10,7 +10,7 @@ import { createLogger } from 'redux-logger';
 import { App } from './App';
 import packageReducer from './packageReducer';
 
-export const myStore = createStore(
+const myStore = createStore(
     packageReducer,
         
     applyMiddleware(

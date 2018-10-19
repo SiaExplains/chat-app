@@ -14,6 +14,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace WebApi
 {
@@ -37,9 +39,24 @@ namespace WebApi
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
-            services.AddCors();
             services.AddDbContext<DataContext>(options => options.UseSqlServer(appSettings.ConnectionString));
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
+            });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://localhost:8080").AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
+
             services.AddMvc();
+
+            
+        
+
             services.AddAutoMapper();            
 
             services.AddAuthentication(x =>
@@ -70,14 +87,15 @@ namespace WebApi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            // global cors policy
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
+            app.UseCors("AllowSpecificOrigin");
+            //app.UseCors(builder =>
+            //    builder.AllowAnyOrigin()
+            //        .AllowAnyHeader()
+            //        .AllowAnyMethod());
 
+            //app.UseCors("CorsPolicy");
             app.UseAuthentication();
+          
 
             app.UseMvc();
         }

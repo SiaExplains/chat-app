@@ -48,7 +48,7 @@ function register(user) {
                 () => { 
                     dispatch(success());
                     history.push('/login');
-                    dispatch(alertActions.success('Registration successful'));
+                    dispatch(alertActions.success('حساب شما با موفقیت ایجاد گردید'));
                 },
                 error => {
                     dispatch(failure(error));

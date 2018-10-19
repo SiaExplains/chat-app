@@ -1,15 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { userActions } from '../_actions';
 import { MailNavigation } from './MailNavigation'
-import {Inbox} from './Inbox'
-import { Router, Route } from 'react-router-dom';
+import { userActions } from '../_actions';
 
-class HomePage extends React.Component {
-    render() {
-        const { history, location, user, users } = this.props;
-        
+class Sent extends React.Component {
+
+    render(){
         return (
             <div className="row">                                        
                     <div className="col-md-9 text-center">
@@ -17,7 +14,7 @@ class HomePage extends React.Component {
                     <div className="panel">
                         <br /><br />
                             <h1>
-                                به سامانه ارسال پیام خوش آمدید
+ارسال شده ها
                             </h1>
                             <br /><br /><br /><br /><br /><br />
                             <br /><br /><br /><br />
@@ -28,6 +25,7 @@ class HomePage extends React.Component {
                         <MailNavigation history={this.history} location={this.location} />                        
                     </div>                    
             </div>
+
         );
     }
 }
@@ -41,5 +39,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedHomePage = connect(mapStateToProps)(HomePage);
-export { connectedHomePage as HomePage };
+const connectedSent = connect(mapStateToProps)(Sent);
+export { connectedSent as Sent };
