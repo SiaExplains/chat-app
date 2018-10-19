@@ -10,11 +10,8 @@ function save(message) {
         mode: 'cors',
         headers: { ...authHeader(), 
             'Content-Type': 'application/json',    
-            'Access-Control-Expose-Headers': 'Access-Control-*, Origin, X-Requested-With, Content-Type, Accept, Authorization',
-            'Access-Control-Allow-Origin':'',
-            'Access-Control-Allow-Methods': 'HEAD, GET, POST, OPTIONS, PUT, PATCH, DELETE',
-            'Access-Control-Allow-Headers': 'Access-Control-*, Origin, X-Requested-With, Content-Type, Accept, Authorization',
-            'Access-Control-Allow-Credentials': true
+            'Access-Control-Allow-Origin':'*',
+
     },
   //  headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(message)       

@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace WebApi.Controllers
 {
+    
     [Authorize]
     [Route("[controller]")]
     public class MessageController : Controller

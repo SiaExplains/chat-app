@@ -43,13 +43,26 @@ namespace WebApi
 
             services.Configure<MvcOptions>(options =>
             {
-                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
+                options.Filters.Add(new CorsAuthorizationFilterFactory("localhost"));
+
             });
+
+
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("http://localhost:8080").AllowAnyHeader()
-                    .AllowAnyMethod());
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+            });
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAll"));
             });
 
             services.AddMvc();
@@ -86,17 +99,8 @@ namespace WebApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            app.UseCors("AllowSpecificOrigin");
-            //app.UseCors(builder =>
-            //    builder.AllowAnyOrigin()
-            //        .AllowAnyHeader()
-            //        .AllowAnyMethod());
-
-            //app.UseCors("CorsPolicy");
+            app.UseCors("AllowAll");
             app.UseAuthentication();
-          
-
             app.UseMvc();
         }
     }
