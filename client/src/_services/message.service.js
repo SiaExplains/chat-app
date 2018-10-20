@@ -7,21 +7,19 @@ export const messageService = {
 function save(message) {
     const requestOptions = {
         method: 'POST',
-        mode: 'cors',
         headers: { ...authHeader(), 
             'Content-Type': 'application/json',    
             'Access-Control-Allow-Origin':'*',
 
     },
-  //  headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(message)       
-        
+        body: JSON.stringify(message)               
     };
-
     return fetch(config.apiUrl + '/message/save', requestOptions).then(handleResponse, handleError);
 }
 
 function handleResponse(response) {
+
+    
     return new Promise((resolve, reject) => {
         if (response.ok) {
             // return json if it was returned in the response

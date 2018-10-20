@@ -10,5 +10,6 @@ namespace WebApi.Dtos
         public string To { get; set; }
         public string Content { get; set; }
         public string Title{ get; set; }
+        public bool ShouldSent { get; set; }
     }
 }

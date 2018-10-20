@@ -13,7 +13,8 @@ class Compose extends React.Component {
             message: {
                 to: '',
                 title: '',
-                content: ''
+                content: '',
+                shouldSent: false
             },
             submitted: false            
         };
@@ -38,10 +39,21 @@ class Compose extends React.Component {
     handleSubmit(event) {
         
         event.preventDefault();
-
-        this.setState({ submitted: true });
+        const { name } = event.target;
         const { message } = this.state;
         const { dispatch } = this.props;
+        var isSent=false;
+        this.setState({ submitted: true });
+        if(name == "send"){
+            isSent = true;
+        }
+        else{
+            isSent = false;
+        }
+
+        message.shouldSent = isSent;
+        this.forceUpdate();
+
         
         if (message.title && message.content && message.to) {
             dispatch(messageActions.save(message));
@@ -57,7 +69,8 @@ class Compose extends React.Component {
             
 
             <div className="row">     
-                    <form name="form" onSubmit={this.handleSubmit}>
+            {/* name="form" onSubmit={this.handleSubmit} */}
+                    <form>
                                   
                     <div className="col-md-9 text-center">
                         <br /><br /><br /><br />
@@ -77,9 +90,9 @@ class Compose extends React.Component {
                         </textarea>
                         <br />
                         <div className="form-group">
-                            <button type="submit" className="btn btn-success">ارسال پیام</button>
+                            <button type="submit" className="btn btn-success" onClick={this.handleSubmit} name="send">ارسال پیام</button>
                             &nbsp;
-                            <button className="btn btn-info">ذخیره پیش نویس</button>
+                            <button className="btn btn-info"  onClick={this.handleSubmit} name="draft">ذخیره پیش نویس</button>
                         </div>
                     </div>
                         

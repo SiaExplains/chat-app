@@ -11,6 +11,7 @@ namespace WebApi.Services
         User Authenticate(string email, string password);
         IEnumerable<User> GetAll();
         User GetById(int id);
+        User GetByEmail(string email);
         User Create(User user, string password);
         void Update(User user, string password = null);
         void Delete(int id);
@@ -149,6 +150,16 @@ namespace WebApi.Services
             }
 
             return true;
+        }
+
+        public User GetByEmail(string email)
+        {
+            var user = _context.Users.SingleOrDefault(x => x.Email == email);
+            if(user == null)
+            {
+                throw new AppException("ایمیل " + email + " معتبر نمی باشد");
+            }
+            return user;
         }
     }
 }
