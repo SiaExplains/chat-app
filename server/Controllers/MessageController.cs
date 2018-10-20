@@ -71,5 +71,46 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _msgService.Delete(id);
+            return Ok();
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var user = _msgService.GetById(id);
+            
+            return Ok(user);
+        }
+
+        [Route("/inbox")]
+        [HttpGet]        
+        public IActionResult GetInbox()
+        {
+            var userId = int.Parse(HttpContext.User.Identity.Name);
+            var users = _msgService.GetInbox(userId);
+            return Ok(users);
+        }
+
+        [Route("/draft")]
+        [HttpGet]
+        public IActionResult GetDrafts()
+        {
+            var userId = int.Parse(HttpContext.User.Identity.Name);
+            var users = _msgService.GetDrafts(userId);
+            return Ok(users);
+        }
+
+        [Route("/sent")]
+        [HttpGet]
+        public IActionResult GetSents()
+        {
+            var userId = int.Parse(HttpContext.User.Identity.Name);
+            var users = _msgService.GetSents(userId);
+            return Ok(users);
+        }
     }
 }

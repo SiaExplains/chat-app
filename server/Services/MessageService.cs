@@ -10,11 +10,12 @@ namespace WebApi.Services
     public interface IMessageService
     {
         Message Save(Message msg);
-        //IEnumerable<Message> GetAll();
-        //Message GetById(int id);
-        //Message Create(Message Message, string password);
+        IEnumerable<Message> GetInbox(int userId);
+        IEnumerable<Message> GetDrafts(int userId);
+        IEnumerable<Message> GetSents(int userId);
+        Message GetById(int id);
         //void Update(Message Message, string password = null);
-        //void Delete(int id);
+        void Delete(int id);
     }
 
     public class MessageService : IMessageService
@@ -26,7 +27,36 @@ namespace WebApi.Services
             _context = context;
         }
 
-      
+        public void Delete(int id)
+        {
+            var msg = _context.Messages.Find(id);
+            if (msg != null)
+            {
+                _context.Messages.Remove(msg);
+                _context.SaveChanges();
+            }
+        }
+
+        public Message GetById(int id)
+        {
+            return _context.Messages.SingleOrDefault(m => m.Id == id);
+        }
+
+        public IEnumerable<Message> GetDrafts(int userId)
+        {
+            return _context.Messages.Where(m => m.IsSent == false && m.UserSenderId == userId).ToList();
+        }
+
+        public IEnumerable<Message> GetInbox(int userId)
+        {
+            return _context.Messages.Where(m => m.IsSent == true && m.UserReceiverId == userId).ToList();
+        }
+
+        public IEnumerable<Message> GetSents(int userId)
+        {
+            return _context.Messages.Where(m => m.IsSent == true && m.UserSenderId == userId).ToList();
+        }
+
         public Message Save(Message msg)
         {
             // validation
@@ -48,5 +78,7 @@ namespace WebApi.Services
 
             return msg;
         }
+
+
     }
 }
