@@ -15,7 +15,7 @@ const myStore = createStore(
         
     applyMiddleware(
         thunkMiddleware,
-        createLogger()
+       // createLogger()
     )
 );
 

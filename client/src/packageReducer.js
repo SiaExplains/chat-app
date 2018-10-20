@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import { alertConstants, userConstants } from './constants';
+import { alertConstants, userConstants, messageConstants } from './constants';
+import ReactTable from "react-table";
 
 export function alert(state = {}, action) {
   switch (action.type) {
@@ -60,6 +61,46 @@ export function registration(state = {}, action) {
   }
 }
 
+export function messages(state = {}, action){
+  switch (action.type) {
+    case messageConstants.SENT_REQUEST:
+      return {
+        loading: true
+      };
+    case messageConstants.SENT_SUCCESS:
+      return {
+        items: action.messages
+      };
+    case messageConstants.SENT_FAILURE:
+      return { 
+        error: action.error
+      };
+    
+    default:
+      return state;
+  }
+}
+
+export function msg(state = {}, action){
+  switch (action.type) {
+    case messageConstants.GETBYID_REQUEST:
+      return {
+        loading: true
+      };
+    case messageConstants.GETBYID_SUCCESS:
+      return {
+        action
+      };
+    case messageConstants.GETBYID_FAILURE:
+      return { 
+        error: action.error
+      };
+    
+    default:
+      return state;
+  }
+}
+
 //----------------------------------------------
 
 export function users(state = {}, action) {
@@ -115,7 +156,12 @@ const packageReducer = combineReducers({
   authentication,
   registration,
   users,
+  messages,
+  msg,
   alert
+ 
+  
+
 });
 
 export default packageReducer;

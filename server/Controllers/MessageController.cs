@@ -14,7 +14,7 @@ using WebApi.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using WebApi.Helpers;
-
+using System.Linq;
 namespace WebApi.Controllers
 {
     
@@ -81,9 +81,9 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var user = _msgService.GetById(id);
+            var msg = _msgService.GetById(id);
             
-            return Ok(user);
+            return Ok(msg);
         }
 
         [Route("/inbox")]
@@ -104,13 +104,21 @@ namespace WebApi.Controllers
             return Ok(users);
         }
 
-        [Route("/sent")]
+        [Route("sents")]
         [HttpGet]
-        public IActionResult GetSents()
+        public IActionResult Sents()
         {
             var userId = int.Parse(HttpContext.User.Identity.Name);
-            var users = _msgService.GetSents(userId);
-            return Ok(users);
+            var msg = _msgService.GetSents(userId).Select(x => new DtoMessaeItem {
+                Date = x.ActionDateTime.ToPersianDate(),
+                Id = x.Id.ToString(),
+                To = _userService.GetById(x.UserReceiverId.Value).FirstName + " " +
+                _userService.GetById(x.UserReceiverId.Value).LastName,
+                Title = x.Title
+            });
+          
+            
+            return Ok(msg);
         }
     }
 }

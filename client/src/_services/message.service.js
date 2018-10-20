@@ -1,7 +1,9 @@
 import { authHeader, config } from '../_helpers'
 
 export const messageService = {
-    save
+    save,
+    getSent,
+    getById
 };
 
 function save(message) {
@@ -15,6 +17,25 @@ function save(message) {
         body: JSON.stringify(message)               
     };
     return fetch(config.apiUrl + '/message/save', requestOptions).then(handleResponse, handleError);
+}
+
+function getSent() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(config.apiUrl + '/message/sents', requestOptions).then(handleResponse, handleError);
+}
+
+function getById(id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    var x = fetch(config.apiUrl + '/message/' + id, requestOptions).then(handleResponse, handleError);    
+    return x;
 }
 
 function handleResponse(response) {

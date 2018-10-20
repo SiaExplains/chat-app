@@ -44,7 +44,7 @@ namespace WebApi.Services
 
         public IEnumerable<Message> GetDrafts(int userId)
         {
-            return _context.Messages.Where(m => m.IsSent == false && m.UserSenderId == userId).ToList();
+            return _context.Messages.Where(m =>  m.IsSent == false && m.UserSenderId == userId).ToList();
         }
 
         public IEnumerable<Message> GetInbox(int userId)

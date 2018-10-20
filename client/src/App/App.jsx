@@ -12,6 +12,7 @@ import {Sent} from '../HomePage/Sent'
 import {Draft} from '../HomePage/Draft'
 import {Trash} from '../HomePage/Trash'
 import {Compose} from '../HomePage/Compose'
+import {ViewMessage} from '../HomePage/ViewMessage'
 
 class App extends React.Component {
     constructor(props) {
@@ -44,6 +45,7 @@ class App extends React.Component {
                                 <PrivateRoute path="/draft" component={Draft} />
                                 <PrivateRoute path="/trash" component={Trash} />
                                 <PrivateRoute path="/compose" component={Compose} />
+                                <PrivateRoute path="/view" component={ViewMessage} />
                                 <Route path="/login" component={LoginPage} />
                                 <Route path="/register" component={RegisterPage} />
                             </div>
