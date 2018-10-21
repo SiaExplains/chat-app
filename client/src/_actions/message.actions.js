@@ -75,13 +75,13 @@ function getDraft() {
 
         messageService.getDraft()
             .then(
-                messages => dispatch(success(messages)),
+                draft => dispatch(success(draft)),
                 error => dispatch(failure(error))
             );
     };
 
     function request() { return { type: messageConstants.DRAFT_REQUEST } }
-    function success(messages) { return { type: messageConstants.DRAFT_SUCCESS, messages } }
+    function success(draft) { return { type: messageConstants.DRAFT_SUCCESS, draft } }
     function failure(error) { return { type: messageConstants.DRAFT_FAILURE, error } }
 }
 

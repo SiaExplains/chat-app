@@ -101,6 +101,26 @@ export function inbox(state = {}, action){
   }
 }
 
+export function draft(state = {}, action){
+  switch (action.type) {
+    case messageConstants.DRAFT_REQUEST:
+      return {
+        loading: true
+      };
+    case messageConstants.DRAFT_SUCCESS:
+      return {
+        items: action.draft
+      };
+    case messageConstants.DRAFT_FAILURE:
+      return { 
+        error: action.error
+      };
+    
+    default:
+      return state;
+  }
+}
+
 export function msg(state = {}, action){
   switch (action.type) {
     case messageConstants.GETBYID_REQUEST:
@@ -179,10 +199,8 @@ const packageReducer = combineReducers({
   messages,
   msg,
   alert,
-  inbox
- 
-  
-
+  inbox,
+  draft
 });
 
 export default packageReducer;
