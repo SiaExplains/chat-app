@@ -20,6 +20,7 @@ class HomePage extends React.Component {
                                 به سامانه ارسال پیام خوش آمدید
                             </h1>
                             <br /><br /><br /><br /><br /><br />
+                            <br /><br /><br /><br /><br /><br />
                             <br /><br /><br /><br />
                     </div>
                         

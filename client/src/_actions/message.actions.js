@@ -8,7 +8,10 @@ import { history } from '../_helpers';
 export const messageActions = {
     save,
     getSent,
-    getById
+    getById,
+    getInbox,
+    getDraft
+
 };
 
 function save(message) {
@@ -48,6 +51,38 @@ function getSent() {
     function request() { return { type: messageConstants.SENT_REQUEST } }
     function success(messages) { return { type: messageConstants.SENT_SUCCESS, messages } }
     function failure(error) { return { type: messageConstants.SENT_FAILURE, error } }
+}
+
+function getInbox() {
+    return dispatch => {
+        dispatch(request());
+
+        messageService.getInbox()
+            .then(
+                inbox => dispatch(success(inbox)),
+                error => dispatch(failure(error))
+            );
+    };
+
+    function request() { return { type: messageConstants.INBOX_REQUEST } }
+    function success(inbox) { return { type: messageConstants.INBOX_SUCCESS, inbox } }
+    function failure(error) { return { type: messageConstants.INBOX_FAILURE, error } }
+}
+
+function getDraft() {
+    return dispatch => {
+        dispatch(request());
+
+        messageService.getDraft()
+            .then(
+                messages => dispatch(success(messages)),
+                error => dispatch(failure(error))
+            );
+    };
+
+    function request() { return { type: messageConstants.DRAFT_REQUEST } }
+    function success(messages) { return { type: messageConstants.DRAFT_SUCCESS, messages } }
+    function failure(error) { return { type: messageConstants.DRAFT_FAILURE, error } }
 }
 
 function getById(id) {

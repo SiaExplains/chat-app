@@ -3,7 +3,9 @@ import { authHeader, config } from '../_helpers'
 export const messageService = {
     save,
     getSent,
-    getById
+    getById,
+    getInbox,
+    getDraft
 };
 
 function save(message) {
@@ -26,6 +28,24 @@ function getSent() {
     };
 
     return fetch(config.apiUrl + '/message/sents', requestOptions).then(handleResponse, handleError);
+}
+
+function getInbox() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(config.apiUrl + '/message/inbox', requestOptions).then(handleResponse, handleError);
+}
+
+function getDraft() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(config.apiUrl + '/message/draft', requestOptions).then(handleResponse, handleError);
 }
 
 function getById(id) {

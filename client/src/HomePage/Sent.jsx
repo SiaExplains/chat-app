@@ -24,23 +24,7 @@ class Sent extends React.Component {
 
         const { messages } = this.props;
  
-          const columns = [
-            {
-                Header: 'عنوان',
-                accessor: 'title', 
-                width: 400,
-                Cell: row => (
-                    <div
-                      style={{
-                        width: "50%",
-                        height: "100%",
-                        borderRadius: "2px"                        
-                      }}
-                    >
-                    {row.value}
-                    </div>
-                )
-            },
+          const columns = [          
             {
                 Header: 'تاریخ',
                 accessor: 'date', 
@@ -76,9 +60,25 @@ class Sent extends React.Component {
                 )
             },
             {
-                Header: 'شناسه',
+                Header: 'عنوان',
+                accessor: 'title', 
+                width: 500,
+                Cell: row => (
+                    <div
+                      style={{
+                        width: "50%",
+                        height: "100%",
+                        borderRadius: "2px"                        
+                      }}
+                    >
+                    {row.value}
+                    </div>
+                )
+            },
+            {
+                Header: 'کد',
                 accessor: 'id', 
-                width: 50,
+                width: 40,
                 Cell: row => (
                     <div
                       style={{
@@ -102,14 +102,14 @@ class Sent extends React.Component {
                     <br /><br /><br /><br />
                     <div className="panel text-right">
                         <br /><br />
-                            <div className="pageTitle">
+                        <div style={{fontSize: "18pt", marginRight: "30px"}}>
                             ارسال شده ها
                             </div>
                             <br /><br />
-                            <ReactTable
+                            <ReactTable 
                             
                                 defaultPageSize={10}
-                                className="-striped -highlight"
+                                className="-striped -highlight text-right"
 
                                 data={messages.items}
                                 columns={columns}

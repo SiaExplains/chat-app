@@ -81,6 +81,26 @@ export function messages(state = {}, action){
   }
 }
 
+export function inbox(state = {}, action){
+  switch (action.type) {
+    case messageConstants.INBOX_REQUEST:
+      return {
+        loading: true
+      };
+    case messageConstants.INBOX_SUCCESS:
+      return {
+        items: action.inbox
+      };
+    case messageConstants.INBOX_FAILURE:
+      return { 
+        error: action.error
+      };
+    
+    default:
+      return state;
+  }
+}
+
 export function msg(state = {}, action){
   switch (action.type) {
     case messageConstants.GETBYID_REQUEST:
@@ -158,7 +178,8 @@ const packageReducer = combineReducers({
   users,
   messages,
   msg,
-  alert
+  alert,
+  inbox
  
   
 
