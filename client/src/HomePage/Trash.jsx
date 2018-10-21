@@ -11,11 +11,13 @@ class Trash extends React.Component {
             <div className="row">                                        
                     <div className="col-md-9 text-center">
                     <br /><br /><br /><br />
-                    <div className="panel ">
+                    <div className="panel">
                     <br /><br />
                             <h1>
                                 حذف شده ها
                             </h1>
+                            <br /><br /><br /><br /><br /><br />
+                            در دست طراحی...
                             <br /><br /><br /><br /><br /><br />
                             <br /><br /><br /><br />
                     </div>

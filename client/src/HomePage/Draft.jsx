@@ -101,7 +101,7 @@ class Draft extends React.Component {
                   <div className="panel text-right">
                       <br /><br />
                       <div style={{fontSize: "18pt", marginRight: "30px"}}>
-                          ارسال شده ها
+                          پیش نویس ها
                           </div>
                           <br /><br />
                           <ReactTable 
