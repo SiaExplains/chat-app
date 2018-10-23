@@ -1,12 +1,13 @@
 # Mailbox Messaging Simulation (ASP.NET Core + ReactJs + EF Core + Redux)
 
 We used these following technologies:
-	* ASP.NET Core
-	* ReactJs
-	* EF Core
-	* Redux
-	* ASP.NET Identity
-	* JWT Token
+
+* ASP.NET Core
+* ReactJs
+* EF Core
+* Redux
+* ASP.NET Identity
+* JWT Token
 
 
 	Front-End Developr:
