@@ -40,7 +40,7 @@ namespace WebApi.Controllers
             var user = _userService.Authenticate(userDto.Email, userDto.Password);
 
             if (user == null)
-                return BadRequest("Email or password is incorrect");
+                return BadRequest("نام کاربری یا کلمه عبور اشتباه است");
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);

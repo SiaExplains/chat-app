@@ -17,7 +17,7 @@ using WebApi.Helpers;
 using System.Linq;
 namespace WebApi.Controllers
 {
-    
+
     [Authorize]
     [Route("[controller]")]
     public class MessageController : Controller
@@ -38,7 +38,7 @@ namespace WebApi.Controllers
             _appSettings = appSettings.Value;
             _userService = userService;
         }
-       // [EnableCors("CorsPolicy")]
+        // [EnableCors("CorsPolicy")]
         [HttpPost("save")]
         public IActionResult save([FromBody]MessageDto msgDto)
         {
@@ -82,26 +82,54 @@ namespace WebApi.Controllers
         public IActionResult GetById(int id)
         {
             var msg = _msgService.GetById(id);
-            
-            return Ok(msg);
+            var from  = _userService.GetById(msg.UserSenderId);
+            var to = _userService.GetById(msg.UserReceiverId.Value);
+            return Ok(
+                    new
+                    {
+                        Title = msg.Title,
+                        MessageContent = msg.MessageContent,
+                        Id = msg.Id,
+                        From = from.FirstName + " " + from.LastName,
+                        To = to.FirstName + " " + to.LastName,
+                        Date = msg.ActionDateTime.ToPersianDate(),
+                    });
+
         }
 
-        [Route("/inbox")]
-        [HttpGet]        
+        [Route("inbox")]
+        [HttpGet]
         public IActionResult GetInbox()
         {
             var userId = int.Parse(HttpContext.User.Identity.Name);
-            var users = _msgService.GetInbox(userId);
-            return Ok(users);
+            var msg = _msgService.GetInbox(userId).Select(x => new DtoMessaeItem
+            {
+                Date = x.ActionDateTime.ToPersianDate(),
+                Id = x.Id.ToString(),
+                From = _userService.GetById(x.UserReceiverId.Value).FirstName + " " +
+                _userService.GetById(x.UserReceiverId.Value).LastName,
+                Title = x.Title
+            });
+
+            return Ok(msg);
         }
 
-        [Route("/draft")]
+        [Route("draft")]
         [HttpGet]
         public IActionResult GetDrafts()
         {
             var userId = int.Parse(HttpContext.User.Identity.Name);
-            var users = _msgService.GetDrafts(userId);
-            return Ok(users);
+            var msg = _msgService.GetDrafts(userId).Select(x => new DtoMessaeItem
+            {
+                Date = x.ActionDateTime.ToPersianDate(),
+                Id = x.Id.ToString(),
+                To = _userService.GetById(x.UserReceiverId.Value).FirstName + " " +
+                _userService.GetById(x.UserReceiverId.Value).LastName,
+                Title = x.Title
+            });
+
+
+            return Ok(msg);
         }
 
         [Route("sents")]
@@ -109,15 +137,16 @@ namespace WebApi.Controllers
         public IActionResult Sents()
         {
             var userId = int.Parse(HttpContext.User.Identity.Name);
-            var msg = _msgService.GetSents(userId).Select(x => new DtoMessaeItem {
+            var msg = _msgService.GetSents(userId).Select(x => new DtoMessaeItem
+            {
                 Date = x.ActionDateTime.ToPersianDate(),
                 Id = x.Id.ToString(),
                 To = _userService.GetById(x.UserReceiverId.Value).FirstName + " " +
                 _userService.GetById(x.UserReceiverId.Value).LastName,
                 Title = x.Title
             });
-          
-            
+
+
             return Ok(msg);
         }
     }
