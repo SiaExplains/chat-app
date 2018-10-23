@@ -85,7 +85,7 @@ class Compose extends React.Component {
                             <label className="">عنوان</label>
                             <input className="form-control text-right"  value={message.title}  onChange={this.handleChange} name="title"  placeholder="عنوان پیام" ></input>
                         </div>
-                        <textarea className="btn-block" name="content"  value={message.content}  onChange={this.handleChange} rows="8">
+                        <textarea style={{direction: "rtl",fontSize: "12pt", textAlign:"right"}} className="btn-block" name="content"  value={message.content}  onChange={this.handleChange} rows="8">
 
                         </textarea>
                         <br />

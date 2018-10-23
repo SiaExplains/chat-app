@@ -8,10 +8,10 @@ class Trash extends React.Component {
 
     render(){
         return (
-            <div className="row">                                        
+            <div className="row"  style={{direction:"rtl"}}>                                        
                     <div className="col-md-9 text-center">
                     <br /><br /><br /><br />
-                    <div className="panel">
+                    <div className="panel"  >
                     <br /><br />
                             <h1>
                                 حذف شده ها

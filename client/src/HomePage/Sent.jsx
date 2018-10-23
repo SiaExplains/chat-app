@@ -24,11 +24,46 @@ class Sent extends React.Component {
 
         const { messages } = this.props;
  
-          const columns = [          
+          const columns = [     
+              
+            {
+                Header: 'کد',
+                accessor: 'id', 
+                width: 50,
+                Cell: row => (
+                    <div
+                      style={{
+                        width: "20%",
+                        height: "100%",
+                        backgroundColor: "#fefefe",
+                        borderRadius: "2px"
+                      }}
+                    >
+                    {row.value}
+                    </div>
+                )
+            },
+            {
+                Header: 'عنوان',
+                accessor: 'title', 
+                minWidth: 250,
+                width: 500,
+                Cell: row => (
+                    <div
+                      style={{
+                        width: "50%",
+                        height: "100%",
+                        borderRadius: "2px"                        
+                      }}
+                    >
+                    {row.value}
+                    </div>
+                )
+            },
             {
                 Header: 'تاریخ',
                 accessor: 'date', 
-                width: 150,
+                // width: 150,
                 Cell: row => (
                     <div
                       style={{
@@ -45,7 +80,7 @@ class Sent extends React.Component {
             {
                 Header: 'گیرنده',
                 accessor: 'to', 
-                width: 200,
+                // width: 200,
                 Cell: row => (
                     <div
                       style={{
@@ -58,40 +93,7 @@ class Sent extends React.Component {
                     {row.value}
                     </div>
                 )
-            },
-            {
-                Header: 'عنوان',
-                accessor: 'title', 
-                width: 500,
-                Cell: row => (
-                    <div
-                      style={{
-                        width: "50%",
-                        height: "100%",
-                        borderRadius: "2px"                        
-                      }}
-                    >
-                    {row.value}
-                    </div>
-                )
-            },
-            {
-                Header: 'کد',
-                accessor: 'id', 
-                width: 40,
-                Cell: row => (
-                    <div
-                      style={{
-                        width: "20%",
-                        height: "100%",
-                        backgroundColor: "#fefefe",
-                        borderRadius: "2px"
-                      }}
-                    >
-                    {row.value}
-                    </div>
-                )
-            }
+            }              
         ];
 
       
@@ -107,7 +109,7 @@ class Sent extends React.Component {
                             </div>
                             <br /><br />
                             <ReactTable 
-                            
+                                style={{direction: "rtl"}}
                                 defaultPageSize={10}
                                 className="-striped -highlight text-right"
 

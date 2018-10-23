@@ -6,43 +6,75 @@ import { userActions, messageActions } from '../_actions';
 
 class ViewMessage extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
+
 
         var msgId = this.props.history.location.state.id;
         this.props.dispatch(messageActions.getById(msgId));
-        //console.log(this.props.msg.action.msg);
+        //this.setState()
     }
 
-    render(){
+    render() {
 
-        //const {m} = this.props;
-        console.log(this.props.msg);
+        const { msg } = this.props;
+        console.log(msg);
         return (
-            <div className="row">                                        
-                    <div className="col-md-9 text-center">
+            <div className="row">
+                <div className="col-md-9 text-center">
                     <br /><br /><br /><br />
                     <div className="panel ">
-                    <br /><br />
-                            <h3>
-                                نمایش پیام
-                            </h3>
+                        <br />
+                
+                        {
+                            msg.items && 
+                            <div>
+                                <div className="row">
+                                <div className="col-md-2">
+                                        <div style={{fontSize: "10pt", textAlign: "center"}}>
+                                            
+                                        </div>
+                                    </div>
+                                    <div className="col-md-2">
+                                        <div style={{fontSize: "10pt", textAlign: "center"}}>
+                                             تاریخ : {msg.items.date}
+                                        </div>
+                                    </div>
+                                    <div className="col-md-2">
+                                        <div style={{fontSize: "10pt",textAlign: "center"}}>
+                                         به : {msg.items.to}
+                                        </div>
+                                    </div>
+                                    <div className="col-md-2">
+                                        <div style={{fontSize: "10pt", textAlign: "center"}}>
+                                         از : {msg.items.from}
+                                        </div>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <div style={{fontSize: "10pt",  textAlign: "center"}}>
+                                         عنوان : {msg.items.title}
+                                        </div>
+                                    </div>
+                                </div>
+                            <br /><br /><br /><br />
+                                <div className="row text-right">
+                                    <div className="col-md-12 text-right">
+                                        <div style={{fontSize: "10pt", margin: "30px", direction:"rtl", textAlign: "right"}}>
+                                            {msg.items.messageContent}
+                                        </div>
+                                    </div>
+                                </div>
+                                <br /><br /><br />
+                            </div>
+                        }
+                    </div>
+                    <br /><br /><br /><br />
+                    <br /><br /><br /><br />
+                </div>
 
-                            <br /><br />
-                            <div>
-                                {/* {m.msg.action.msg.title} */}
-                            </div>
-                            <div>
-                                {/* {m.msg.action.msg.MessageContent} */}
-                            </div>
-                            <br /><br /><br /><br />
-                            <br /><br /><br /><br />
-                    </div>
-                        
-                    </div>
-                    <div className="col-md-3">
-                        <MailNavigation history={this.history} location={this.location} />                        
-                    </div>                    
+                <div className="col-md-3">
+                    <MailNavigation history={this.history} location={this.location} />
+                </div>
             </div>
         );
     }
