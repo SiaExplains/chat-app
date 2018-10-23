@@ -1,4 +1,4 @@
-# Mailbox Messaging Simulation (ASP.NET Core + ReactJs + EF Core + Redux)
+# Mailbox Messaging Simulation
 
 We used these following technologies:
 
